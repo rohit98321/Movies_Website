@@ -29,6 +29,8 @@ const Create = () => {
 
        
       });
+
+      toast.success("movie addred successfully")
         
         console.log(res);
       } catch (error) {
