@@ -10,33 +10,35 @@ const Create = () => {
 
     const movieHandler= async (movie)=>{
 
-      const formData=new FormData();
+      console.log(movie);
 
-      formData.append("title",movie.title);
-      formData.append("genre",movie.genre);
-      formData.append("stars",movie.stars);
-      formData.append("languages",movie.languages);
-      formData.append("director",movie.director);
-      formData.append("video",movie.video[0]);
-      formData.append("poster",movie.poster[0]);
-      console.log(formData);
+      // const formData=new FormData();
 
-      try {
+      // formData.append("title",movie.title);
+      // formData.append("genre",movie.genre);
+      // formData.append("stars",movie.stars);
+      // formData.append("languages",movie.languages);
+      // formData.append("director",movie.director);
+      // formData.append("video",movie.video[0]);
+      // formData.append("poster",movie.poster[0]);
+      // console.log(formData);
 
-        const res= await axios.post("http://localhost:3000/movie/movies",formData,{headers:{
-          "Content-Type": "multipart/form-data",
-        },
+      // try {
+
+      //   const res= await axios.post("http://localhost:3000/movie/movies",formData,{headers:{
+      //     "Content-Type": "multipart/form-data",
+      //   },
 
        
-      });
+      // });
 
-      toast.success("movie addred successfully")
+      // toast.success("movie addred successfully")
         
-        console.log(res);
-      } catch (error) {
-        console.log(error);
+      //   console.log(res);
+      // } catch (error) {
+      //   console.log(error);
         
-      }
+      // }
       
 
     }
@@ -53,6 +55,18 @@ const Create = () => {
       <input className='w-[600px] h-[50px] border-b outline-0' {...register("director")} type="text" placeholder='Director' />
       <input className='w-[600px] h-[50px] border-b outline-0' {...register("video")} type="file" placeholder='Video' />
       <input className='w-[600px] h-[50px] border-b outline-0' {...register("poster")} type="file" placeholder='Poster Image' />
+
+      <select 
+      {...register("category")}
+        defaultValues=""
+        className='outline-0 bg-neutral-700  w-[600px] transition-all duration-700 ease-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400'
+        >
+        <option value="bollywood">Bollywood</option>
+        <option value="hollywood">Hollywood</option>
+        <option value="animation">Animation</option>
+        <option value="south">South</option>
+        <option value="webseries">WebSeries</option>
+      </select>
       
 
       <button className='bg-amber-800 p-3 rounded-3xl'>Create</button>
