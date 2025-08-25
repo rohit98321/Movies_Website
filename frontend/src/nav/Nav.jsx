@@ -42,7 +42,7 @@ const Nav = () => {
       {/*for mobiles*/}
       <div className="absolute right-2" >
         <button onClick={() => setisOpen(!isOpen)} className=" md:hidden text-5xl transition-all ease-in-out duration-200">
-          {isOpen ? <X /> : <Menu />}
+          {isOpen ? <X  size={45} /> : <Menu  size={45} />}
 
         </button>
 
