@@ -3,10 +3,10 @@ import {motion} from "framer-motion"
 import {Link, useParams } from "react-router-dom"
 const MovieCard = ({movie}) => {
 
-  const id =useParams()
-
+  
+  console.log("movie details",movie);
   return (
-    <Link to={`/singlecard/${id.toString()}`}>
+    <Link to={`/singlecard/${movie._id}`}>
     <motion.div
       className="bg-gray-900 text-white rounded-2xl shadow-lg p-4 flex flex-col gap-3 hover:scale-105 transition-transform duration-300"
       initial={{ opacity: 0, y: 50 }}

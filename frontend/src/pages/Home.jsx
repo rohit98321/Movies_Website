@@ -37,9 +37,9 @@ const Home = () => {
       
       }, [])
       
-      const renderMovies=movies2.map((movie)=>(
+      const renderMovies=movies2?.map((movie)=>(
 
-        <MovieCard key={movie._id.toString()} movie={movie}/>
+        <MovieCard key={movie._id} movie={movie}/>
       ))
 
 
