@@ -1,80 +1,138 @@
-import React from 'react'
-import {useForm} from "react-hook-form"
-import axios from "axios"
-import {toast} from "react-toastify"
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Create = () => {
+  const { register, reset, handleSubmit } = useForm();
+  const [uploadProgress, setUploadProgress] = useState(0);
 
-  const {register,reset,handleSubmit }=useForm()
+  const movieHandler = async (movie) => {
+    console.log(movie);
 
+    const formData = new FormData();
+    formData.append("title", movie.title);
+    formData.append("genre", movie.genre);
+    formData.append("stars", movie.stars);
+    formData.append("languages", movie.languages);
+    formData.append("director", movie.director);
+    formData.append("video", movie.video[0]);
+    formData.append("poster", movie.poster[0]);
+    formData.append("category", movie.category);
 
-    const movieHandler= async (movie)=>{
+    try {
+      toast.info("Uploading movie... Please wait 🚀");
 
-      console.log(movie);
-
-      const formData=new FormData();
-
-      formData.append("title",movie.title);
-      formData.append("genre",movie.genre);
-      formData.append("stars",movie.stars);
-      formData.append("languages",movie.languages);
-      formData.append("director",movie.director);
-      formData.append("video",movie.video[0]);
-      formData.append("poster",movie.poster[0]);
-      console.log(formData);
-
-      try {
-
-        toast.success("please wait some time it's uploading here")
-        const res= await axios.post("http://localhost:3000/movie/movies",formData,{headers:{
+      const res = await axios.post("https://movies-website-ulxw.onrender.com/movie/movies", formData, {
+        headers: {
           "Content-Type": "multipart/form-data",
         },
-        
-        
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setUploadProgress(percent);
+          }
+        },
       });
-      reset()
-      toast.success("movie addred successfully")
-        
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-        
-      }
-      
 
+      reset();
+      setUploadProgress(0);
+      toast.success("Movie uploaded successfully 🎉");
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      setUploadProgress(0);
+      toast.error("Failed to upload movie ❌");
     }
+  };
 
   return (
-    <div>
+    <div className="flex justify-center items-center py-10 px-4">
       <form
-      className='flex flex-col gap-6 w-1/2 mx-auto justify-center p-7 items-center'
-       onSubmit={handleSubmit(movieHandler)}>
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("title")} type="text" placeholder='Title' />
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("genre")} type="text" placeholder='Genre' />
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("stars")} type="text" placeholder='Stars' />
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("languages")} type="text" placeholder='Languages' />
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("director")} type="text" placeholder='Director' />
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("video")} type="file" placeholder='Video' />
-      <input className='w-[400px] h-[50px] sm:w-[600px]  border-b' {...register("poster")} type="file" placeholder='Poster Image' />
+        className="flex flex-col gap-6 w-full max-w-lg bg-neutral-900 p-6 rounded-2xl shadow-lg"
+        onSubmit={handleSubmit(movieHandler)}
+      >
+        {/* Inputs */}
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("title")}
+          type="text"
+          placeholder="Title"
+        />
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("genre")}
+          type="text"
+          placeholder="Genre"
+        />
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("stars")}
+          type="text"
+          placeholder="Stars"
+        />
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("languages")}
+          type="text"
+          placeholder="Languages"
+        />
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("director")}
+          type="text"
+          placeholder="Director"
+        />
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("video")}
+          type="file"
+        />
+        <input
+          className="w-full h-12 border-b bg-transparent text-white px-3 outline-none"
+          {...register("poster")}
+          type="file"
+        />
 
-      <select 
-      {...register("category")}
-        defaultValues=""
-        className='outline-0 bg-neutral-700  w-[600px] sm:w-[600px] transition-all duration-700 ease-out focus:border-indigo-500 focus:ring-2 focus:ring-indigo-400'
+        {/* Select */}
+        <select
+          {...register("category")}
+          className="w-full h-12 bg-neutral-700 text-white px-3 rounded-md outline-none focus:ring-2 focus:ring-indigo-400"
         >
-        <option value="bollywood">Bollywood</option>
-        <option value="hollywood">Hollywood</option>
-        <option value="animation">Animation</option>
-        <option value="south">South</option>
-        <option value="webseries">WebSeries</option>
-      </select>
-      
+          <option value="bollywood">Bollywood</option>
+          <option value="hollywood">Hollywood</option>
+          <option value="animation">Animation</option>
+          <option value="south">South</option>
+          <option value="webseries">WebSeries</option>
+        </select>
 
-      <button className='bg-amber-800 p-3 rounded-3xl'>Create</button>
+        {/* Progress Bar */}
+        {uploadProgress > 0 && (
+          <div className="w-full">
+            <div className="flex justify-between mb-1 text-sm text-white">
+              <span>Uploading...</span>
+              <span>{uploadProgress}%</span>
+            </div>
+            <div className="w-full bg-gray-700 rounded-full h-3">
+              <div
+                className="bg-amber-600 h-3 rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${uploadProgress}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+
+        {/* Button */}
+        <button
+          type="submit"
+          className="bg-amber-800 text-white py-3 rounded-2xl hover:bg-amber-700 transition duration-300"
+          disabled={uploadProgress > 0 && uploadProgress < 100} // disable while uploading
+        >
+          {uploadProgress > 0 && uploadProgress < 100 ? "Uploading..." : "Create"}
+        </button>
       </form>
-
     </div>
-  )
-}
+  );
+};
 
-export default Create
+export default Create;
