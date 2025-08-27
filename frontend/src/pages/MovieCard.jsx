@@ -8,7 +8,7 @@ const MovieCard = ({movie}) => {
   return (
     <Link to={`/singlecard/${movie._id}`}>
     <motion.div
-      className="bg-gray-900 text-white rounded-2xl shadow-lg p-4 flex flex-col gap-3 hover:scale-105 transition-transform duration-300"
+      className="bg-gray-900 w-[200px] mx-2 h-[500px] text-white rounded-2xl shadow-lg p-4 flex flex-col gap-3 hover:scale-105 transition-transform duration-300"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.05 }}
