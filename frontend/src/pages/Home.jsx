@@ -44,7 +44,7 @@ const Home = () => {
 
 
   return (
-    <div className='grid p-5 sm:grid-cols-3 mx-auto md:grid-cols-6 gap-4 z-5'>
+    <div className='grid grid-cols-2 p-10 sm:grid-cols-3 mx-auto md:grid-cols-6 gap-4 z-5'>
 
             {renderMovies}
 

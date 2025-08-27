@@ -40,9 +40,9 @@ const Nav = () => {
      </div>
 
       {/*for mobiles*/}
-      <div className="absolute right-2" >
+      <div className="absolute z-50 p-1 gap-4 right-1 bg-neutral-800" >
         <button onClick={() => setisOpen(!isOpen)} className=" md:hidden text-5xl transition-all ease-in-out duration-200">
-          {isOpen ? <X  size={45} /> : <Menu  size={45} />}
+          {isOpen ? <X  size={20} /> : <Menu  size={45} />}
 
         </button>
 

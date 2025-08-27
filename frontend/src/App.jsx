@@ -4,7 +4,7 @@ import Nav from './nav/Nav'
 
 const App = () => {
   return (
-    <div className='text-2xl text-indigo-50 bg-neutral-800 w-svw h-svh'>
+    <div className='text-2xl text-indigo-50 bg-neutral-800 w-screen h-full'>
     
     <Nav/>
     <Mainroutes/>
