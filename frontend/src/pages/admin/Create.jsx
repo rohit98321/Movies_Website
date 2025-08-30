@@ -46,8 +46,14 @@ const Create = () => {
     }
   };
 
+
+      const moviecreate=(movie)=>{
+        
+
+      }
+
   return (
-    <div className="flex justify-center items-center py-10 px-4">
+    <div className="flex justify-center items-center py-10 px-10">
       <form
         className="flex flex-col gap-6 w-full max-w-lg bg-neutral-900 p-6 rounded-2xl shadow-lg"
         onSubmit={handleSubmit(movieHandler)}

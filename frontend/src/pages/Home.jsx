@@ -19,7 +19,7 @@ const Home = () => {
       const fetchMovies= async ()=>{
         try {
 
-          const {data}=await axios.get("https://movies-website-ulxw.onrender.com/movie/movies")
+          const {data}=await axios.get("/movie/movies")
           console.log(data);
           
           dispatch(loadMovie(data))

@@ -1,7 +1,8 @@
 const express = require("express");
 const movieModel = require("../models/Movie.models");
 const multer = require("multer");
-const uploadFile =require("../storageService/storage.service")
+const uploadFile =require("../storageService/storage.service");
+const { default: mongoose } = require("mongoose");
 
 const router = express.Router();
 
@@ -14,7 +15,10 @@ const upload = multer({ storage: multer.memoryStorage() });
     try {
 
       const movies=await movieModel.find();
-      res.status(200).json(movies)
+      res.status(200).json({
+        message:"movies fetch successfully",
+        movies
+      })
 
     } catch (error) {
       console.log(error);
@@ -60,5 +64,41 @@ router.post(
     });
   }
 );
+
+//update
+router.patch("/movies/:id",async(req,res)=>{
+
+    try {
+
+      const {id}=req.params
+
+    
+    if(!mongoose.Types.ObjectId.isValid(id)){
+      return res.status(404).json({
+        message:"movie not found",
+        
+      })
+    }
+    const existmovie=await movieModel.findById(id)
+   
+    const updatedmovie=await movieModel.findByIdAndUpdate(id,req.body,{new:true})
+
+    res.status(200).json({
+      message:"movie updated successfully",
+      updatedmovie
+    })
+
+      
+    } catch (error) {
+      res.status(500).json({
+        message:"sever error"
+      })
+    }
+  
+
+
+   
+
+})
 
 module.exports = router;
