@@ -10,8 +10,8 @@ const initialState={
     initialState,
     reducers:{
         loadMovie:(state,actions)=>{
-            console.log("actons payload",actions.payload);
-            state.movies=actions.payload
+            state.movies=actions.payload;
+            console.log(state.movies);
         }
     }
 })

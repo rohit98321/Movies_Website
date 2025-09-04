@@ -1,11 +1,76 @@
 import axios from "../../api/config"
+import { loadMovie } from "../Slices/movie.slice";
+import {toast} from "react-toastify"
 
 
 
 
-export const ayncgetmovies=()=> async (dispatch,getstate)=>{
+export const asyncgetmovies=()=> async (dispatch,getstate)=>{
+    try {
+
+        const {data}=await axios.get("/movie/movies")
+        console.log(data.movies);
+        
+        dispatch(loadMovie(data.movies))
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+
+}
+
+export const  asyncCreateMovie=(formData)=> async(dispatch,getsate)=>{
+
+  try {
+
+    const res = await axios.post("https://movies-website-ulxw.onrender.com/movie/movies", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+
+       
+       
+      });
+      toast.success("moive created")
+      dispatch(asyncgetmovies())
+    
+  } catch (error) {
+    toast.success(error.response.data.message)
+    
+    
+  }
+
+}
+
+export const asyncUpdateMovie= (updatedMoive ,id) => async (dispatch,getstate)=>{
+
+  try {
+    
+    const  {data}= await axios.patch(`/movie/movies/${id}`,updatedMoive)
+    console.log(data.message);
+    dispatch(asyncgetmovies())
+    toast.success("updated")
+
+    
+    
+    
+    
+  } catch (error) {
+    console.log(error);
+    toast.error(error.response?.data?.message)
+    
+  }
 
 
-    axios.get("/movie/movies")
+}
+
+export const asyncDeleteMovie =(id)=>async (dispatch,getstate)=>{
+
+
+  await axios.delete(`/movie/movies/${id}`)
+  toast.success("movie deleted successfully")
+  dispatch(asyncgetmovies())
+
 
 }

@@ -59,6 +59,12 @@ router.post(
             poster:posterUpload.url
         })
 
+        if(!movie){
+          return res.status(404).json({
+            message: "no any data meet here",
+          });
+        }
+
     res.status(201).json({
       message: "movie details added succesfully",
     });
@@ -71,15 +77,19 @@ router.patch("/movies/:id",async(req,res)=>{
     try {
 
       const {id}=req.params
+     
 
     
-    if(!mongoose.Types.ObjectId.isValid(id)){
+  
+    const existmovie=await movieModel.findById(id)
+
+
+    if(!existmovie){
       return res.status(404).json({
-        message:"movie not found",
-        
+        message:"movie not found in database"
+
       })
     }
-    const existmovie=await movieModel.findById(id)
    
     const updatedmovie=await movieModel.findByIdAndUpdate(id,req.body,{new:true})
 
@@ -91,13 +101,37 @@ router.patch("/movies/:id",async(req,res)=>{
       
     } catch (error) {
       res.status(500).json({
-        message:"sever error"
+        message:"server error"
       })
     }
   
 
 
    
+
+})
+
+//delete
+router.delete("/movies/:id",async (req,res)=>{
+
+      const {id}=req.params
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid movie ID" });
+      }
+
+     try {
+
+      const movie=await movieModel.findOneAndDelete(id)
+
+      if(!movie){res.json({message:"movie not found"})}else{res.json({message:"movie deleted successfully",movie})}
+      
+     } catch (error) {
+      console.log(error);
+      
+     }
+
+
 
 })
 
