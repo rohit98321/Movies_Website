@@ -1,9 +1,27 @@
-import React from 'react'
+import React from "react";
 
 const Bollywood = () => {
-  return (
-    <div>Bollywood</div>
-  )
-}
 
-export default Bollywood
+
+  
+  const movies=useSelector((state)=> state.movie.movies || [])
+
+  console.log(movies);
+
+    const bollywoodMovies=movies.filter(movie=> movie.cotegory.Bollywood)
+    console.log(bollywoodMovies);
+
+    const renderMovies= movies.map((movie)=>(
+      <MovieCard key={movie._id} movie={movie}/>
+  ))
+
+
+
+  return (
+    <div className="grid grid-cols-2 p-10 sm:grid-cols-3 mx-auto md:grid-cols-6 gap-4 z-5">
+      {movies.length > 0 ? renderMovies : <p>loading...</p>}
+    </div>
+  );
+};
+
+export default Bollywood;
