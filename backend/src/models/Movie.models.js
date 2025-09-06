@@ -7,7 +7,8 @@ const movieSchema=new mongoose.Schema({
     languages:String,
     director:String,
     video:String,
-    poster:String
+    poster:String,
+    category:String
     
 })
 

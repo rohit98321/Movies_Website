@@ -24,7 +24,7 @@ export const  asyncCreateMovie=(formData)=> async(dispatch,getsate)=>{
 
   try {
 
-    const res = await axios.post("https://movies-website-ulxw.onrender.com/movie/movies", formData, {
+    const res = await axios.post("/movie/movies", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         }

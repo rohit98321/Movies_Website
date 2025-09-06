@@ -22,14 +22,9 @@ const Create = () => {
     formData.append("poster", movie.poster[0]);
     formData.append("category", movie.category);
 
-
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ": " + pair[1]);
-    }
-    console.log(formData);
     dispatch(asyncCreateMovie(formData))
    
-    toast.warning("please wait some time uploading..")
+    toast.warning("please wait some times")
 
   };
 

@@ -1,7 +1,7 @@
 const express = require("express");
 const movieModel = require("../models/Movie.models");
 const multer = require("multer");
-const uploadFile = require("../storageService/storage.service");
+
 const { default: mongoose } = require("mongoose");
 const moiveController = require("../controller/movieContrller");
 

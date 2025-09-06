@@ -1,4 +1,5 @@
 const movieModel=require("../models/Movie.models")
+const uploadFile = require("../storageService/storage.service");
 
 
 const moviefetchController=async (req,res)=>{
@@ -27,15 +28,17 @@ const moivepostController= async(req,res)=>{
     const videoUpload = await uploadFile(videoFile);
     console.log(videoUpload.url);
 
+    console.log(req.body);
+
     const movie = await movieModel.create({
       title: req.body.title,
       genre: req.body.genre,
       stars: req.body.stars,
+      category:req.body.category,
       languages: req.body.languages,
       director: req.body.director,
       video: videoUpload.url,
-      poster: posterUpload.url,
-      category:req.body.category,
+      poster: posterUpload.url
     });
 
     if (!movie) {
