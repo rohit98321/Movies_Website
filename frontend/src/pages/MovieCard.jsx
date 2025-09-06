@@ -39,6 +39,9 @@ const MovieCard = ({movie}) => {
         <p>
           <span className="font-semibold">Stars:</span> {movie.stars}
         </p>
+        <p>
+          <span className="font-semibold">Category:</span> {movie.category}
+        </p>
         
       </div>
 

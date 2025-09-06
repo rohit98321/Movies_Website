@@ -37,6 +37,13 @@ const Nav = () => {
       >
         Create
       </NavLink>
+
+      <NavLink
+        to={"/user/register"}
+        className={(e) => e.isActive && "text-red-950"}
+      >
+        admin
+      </NavLink>
      </div>
 
       {/*for mobiles*/}

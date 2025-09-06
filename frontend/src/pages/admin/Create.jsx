@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { asyncCreateMovie } from "../../redux/actions/movieAction";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const { register, reset, handleSubmit } = useForm();
   const [upload, setupload] = useState(false)
   const dispatch=useDispatch()
+  const navigate=useNavigate()
 
   const movieHandler = async (movie) => {
     console.log(movie);
@@ -23,8 +25,14 @@ const Create = () => {
     formData.append("category", movie.category);
 
     dispatch(asyncCreateMovie(formData))
+    reset()
    
     toast.warning("please wait some times")
+    setInterval(() => {
+      navigate("/")
+      
+    }, 10000);
+
 
   };
 

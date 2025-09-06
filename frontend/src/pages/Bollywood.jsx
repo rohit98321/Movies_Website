@@ -1,4 +1,7 @@
 import React from "react";
+import {useSelector } from 'react-redux'
+import MovieCard from './MovieCard'
+
 
 const Bollywood = () => {
 
@@ -8,10 +11,10 @@ const Bollywood = () => {
 
   console.log(movies);
 
-    const bollywoodMovies=movies.filter(movie=> movie.cotegory.Bollywood)
+    const bollywoodMovies=movies.filter(movie=> movie.category === "bollywood")
     console.log(bollywoodMovies);
 
-    const renderMovies= movies.map((movie)=>(
+    const renderMovies= bollywoodMovies.map((movie)=>(
       <MovieCard key={movie._id} movie={movie}/>
   ))
 
@@ -19,7 +22,7 @@ const Bollywood = () => {
 
   return (
     <div className="grid grid-cols-2 p-10 sm:grid-cols-3 mx-auto md:grid-cols-6 gap-4 z-5">
-      {movies.length > 0 ? renderMovies : <p>loading...</p>}
+      {bollywoodMovies.length > 0 ? renderMovies : <p>loading...</p>}
     </div>
   );
 };
