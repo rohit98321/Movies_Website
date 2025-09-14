@@ -26,6 +26,7 @@ const userRegisterController = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
+      sameSite: "none",
     });
 
     res.status(200).json({
@@ -59,50 +60,49 @@ const userLoginController = async (req, res) => {
   res.cookie("token", token, {
     httpOnly: true,
     secure: true,
+    sameSite: "none",
   });
 
   res.status(200).json({
     message: "user logged in successfully",
-    user:existEmail,
+    user: existEmail,
   });
 };
 
-
-const userLogoutController = async(req,res)=>{
-  res.clearCookie("token",{
-    httpOnly:true,
-    secure:true
+const userLogoutController = async (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none"
   });
   res.json({
-    message:"logout successfully"
-  })
-}
+    message: "logout successfully",
+  });
+};
 
-const userProfileController= async (req,res)=>{
-  const token=req.cookies.token;
+const userProfileController = async (req, res) => {
+  const token = req.cookies.token;
 
   if (!token) return res.status(401).json({ message: "Unauthorized" });
   try {
-    const decode=jwt.verify(token,process.env.JWT_SECRET);
-    
-    const user= await userModel.findById(decode.id)
-  
+    const decode = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await userModel.findById(decode.id);
+
     res.status(202).json({
-      message:"user profile fetched",
-      user
-    })
-    
+      message: "user profile fetched",
+      user,
+    });
   } catch (error) {
     res.status(404).json({
-      message:"token not valid"
-    })
-    
+      message: "token not valid",
+    });
   }
-}
+};
 
 module.exports = {
   userRegisterController,
   userLoginController,
   userLogoutController,
-  userProfileController
+  userProfileController,
 };
