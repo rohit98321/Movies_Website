@@ -2,14 +2,14 @@ const express =require("express")
 const movieRoute =require("./routes/movie.router")
 const UserRoute=require("./routes/User.router")
 const cors=require("cors")
-const cookie= require("cookie-parser")
+
 const cookieParser = require("cookie-parser")
 
 
 const app=express()
 
 app.use(cors({
-    origin:[
+    origin:[    
         "http://localhost:5173",
         "https://movies-website-1-qu9q.onrender.com"
     ],
