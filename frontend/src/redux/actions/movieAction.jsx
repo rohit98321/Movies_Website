@@ -9,7 +9,7 @@ export const asyncgetmovies=()=> async (dispatch,getstate)=>{
     try {
 
         const {data}=await axios.get("/movie/movies")
-        console.log(data.movies);
+        console.log("first moive fetch data",data);
         
         dispatch(loadMovie(data.movies))
         

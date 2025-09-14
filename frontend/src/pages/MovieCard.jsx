@@ -4,7 +4,7 @@ import {Link, useParams } from "react-router-dom"
 const MovieCard = ({movie}) => {
 
   
-  console.log("movie details",movie);
+  
   return (
     <Link to={`/singlecard/${movie._id}`}>
     <motion.div

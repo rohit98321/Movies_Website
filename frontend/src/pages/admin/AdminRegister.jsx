@@ -2,15 +2,18 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { asyncUserRegister } from "../../redux/actions/userAction";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminRegister = () => {
   const { register, reset, handleSubmit } = useForm();
   const dispatch=useDispatch()
+  const navigate=useNavigate()
 
   const userRegisterHandler=(user)=>{
     console.log(user);
     dispatch(asyncUserRegister(user))
+    navigate("/")
+    
   }
 
   return (

@@ -9,6 +9,7 @@ import Create from "../pages/admin/Create";
 import MovieSingleCard from "../pages/MovieSingleCard";
 import AdminRegister from "../pages/admin/AdminRegister";
 import AdminLogin from "../pages/admin/AdminLogin";
+import AdminLogout from "../pages/admin/AdminLogout";
 
 const Mainroutes = () => {
   return (
@@ -24,6 +25,8 @@ const Mainroutes = () => {
 
         <Route path="/user/register" element={<AdminRegister/>} />
         <Route path="/user/login" element={<AdminLogin/>} />
+        <Route path="/user/logout" element={<AdminLogout/>} />
+
         
 
         <Route path="/singlecard/:id" element={<MovieSingleCard/>} />

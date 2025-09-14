@@ -1,56 +1,67 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const Nav = () => {
   const [isOpen, setisOpen] = useState(false);
 
+  const user= useSelector((state) => state.user?.user);
+  console.log("nav user",user);
+
   return (
-    <div className="p-5" >
+    <div className="p-5">
+      <div className=" hidden md:flex text-xl gap-5 justify-center">
+        <NavLink to={"/"} className={(e) => e.isActive && "text-red-950"}>
+          Home
+        </NavLink>
+        <NavLink
+          to={"/bollywood"}
+          className={(e) => e.isActive && "text-red-950"}
+        >
+          Bollywood
+        </NavLink>
+        <NavLink
+          to={"/hollywood"}
+          className={(e) => e.isActive && "text-red-950"}
+        >
+          Hollywood
+        </NavLink>
+        <NavLink
+          to={"/webseries"}
+          className={(e) => e.isActive && "text-red-950"}
+        >
+          WebSeries
+        </NavLink>
 
-     <div className=" hidden md:flex text-xl gap-5 justify-center">
-     <NavLink to={"/"} className={(e) => e.isActive && "text-red-950"}>
-        Home
-      </NavLink>
-      <NavLink
-        to={"/bollywood"}
-        className={(e) => e.isActive && "text-red-950"}
-      >
-        Bollywood
-      </NavLink>
-      <NavLink
-        to={"/hollywood"}
-        className={(e) => e.isActive && "text-red-950"}
-      >
-        Hollywood
-      </NavLink>
-      <NavLink
-        to={"/webseries"}
-        className={(e) => e.isActive && "text-red-950"}
-      >
-        WebSeries
-      </NavLink>
+        {user.isAdmin && <NavLink to={"/create"} className={(e) => e.isActive && "text-red-950"}>
+          Create
+        </NavLink>}
 
-      <NavLink
-        to={"/create"}
-        className={(e) => e.isActive && "text-red-950"}
-      >
-        Create
-      </NavLink>
-
-      <NavLink
-        to={"/user/register"}
-        className={(e) => e.isActive && "text-red-950"}
-      >
-        admin
-      </NavLink>
-     </div>
+        {user ? (
+          <NavLink
+            to={"/user/logout"}
+            className={(e) => e.isActive && "text-red-950"}
+          >
+            Logout
+          </NavLink>
+        ) : (
+          <NavLink
+            to={"/user/register"}
+            className={(e) => e.isActive && "text-red-950"}
+          >
+            user
+          </NavLink>
+        )}
+      </div>
 
       {/*for mobiles*/}
-      <div className="absolute z-50 p-1 gap-4 right-1 bg-neutral-800" >
-        <button onClick={() => setisOpen(!isOpen)} className=" md:hidden text-5xl transition-all ease-in-out duration-200">
-          {isOpen ? <X  size={20} /> : <Menu  size={45} />}
-
+      <div className="absolute z-50 p-1 gap-4 right-1 bg-neutral-800">
+        <button
+          onClick={() => setisOpen(!isOpen)}
+          className=" md:hidden text-5xl transition-all ease-in-out duration-200"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={45} />}
         </button>
 
         {isOpen && (
@@ -60,7 +71,9 @@ const Nav = () => {
             </NavLink>
             <NavLink
               to={"/bollywood"}
-              className={(e) => e.isActive && "text-red-950"}
+              className={(e) =>
+                e.isActive && `text-red-950 ${setisOpen(!false)}`
+              }
             >
               Bollywood
             </NavLink>
@@ -77,19 +90,28 @@ const Nav = () => {
               WebSeries
             </NavLink>
 
-            <NavLink
-        to={"/create"}
-        className={(e) => e.isActive && "text-red-950"}
-      >
-        Create
-      </NavLink>
+            {user.isAdmin && <NavLink to={"/create"} className={(e) => e.isActive && "text-red-950"}>
+          Create
+        </NavLink>}
 
+            {user ? (
+              <NavLink
+                to={"/user/logout"}
+                className={(e) => e.isActive && "text-red-950"}
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink
+                to={"/user/register"}
+                className={(e) => e.isActive && "text-red-950"}
+              >
+                user
+              </NavLink>
+            )}
           </div>
         )}
       </div>
-
-
-
     </div>
   );
 };

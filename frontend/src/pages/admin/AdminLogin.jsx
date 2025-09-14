@@ -20,7 +20,7 @@ const AdminLogin = () => {
     onSubmit={handleSubmit(userLoginHandler)}
     className="w-full max-w-md bg-black-900 p-6 rounded-lg shadow-md space-y-4"
   >
-    <h2 className="text-2xl font-semibold text-center text-gray-700">Register</h2>
+    <h2 className="text-2xl font-semibold text-center text-gray-700">Login</h2>
 
   
     <input
@@ -41,7 +41,7 @@ const AdminLogin = () => {
       type="submit"
       className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition duration-300"
     >
-      Register
+      Login
     </button>
 
     <p className="text-center text-sm text-gray-600">

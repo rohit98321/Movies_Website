@@ -10,11 +10,19 @@ const userSlice=createSlice({
     reducers:{
         loaduser:(state,actions)=>{
             state.user=actions.payload
+            console.log("state.user",state.user);
+            
+
+        },
+
+        clearuser:(state,actions)=>{
+            state.user="";
+           
 
         }
     }
 })
 
 
-export const {loaduser}=userSlice.actions
+export const {loaduser,clearuser}=userSlice.actions
 export default userSlice.reducer

@@ -14,7 +14,10 @@ const MovieSingleCard = () => {
 
   const dispatch=useDispatch()
   const movies = useSelector((state) => state.movie.movies);
+  const {user} = useSelector((state) => state.user?.user);
   const movie = movies?.find((movie) => movie._id == id);
+
+  
   
 
 
@@ -99,7 +102,10 @@ const MovieSingleCard = () => {
           </div>
 
 
+          {/* form */}
+          {user?.isAdmin ? 
           
+          (
             <div>
             <form
         className="flex flex-col gap-6 w-full max-w-lg bg-neutral-900 p-6 rounded-2xl shadow-lg"
@@ -182,6 +188,11 @@ const MovieSingleCard = () => {
 
       
             </div>
+          )
+          :
+          "loading"
+          }
+            
 
     </div>
   ) : (

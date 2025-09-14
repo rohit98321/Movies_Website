@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import Mainroutes from './routes/Mainroutes'
 import Nav from './nav/Nav'
 import { asyncgetmovies } from "./redux/actions/movieAction"
+import { asyncGetUser } from "./redux/actions/userAction"
 import { useDispatch } from 'react-redux'
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(asyncgetmovies())
+    dispatch(asyncGetUser())
     
     }, [])
   return (
