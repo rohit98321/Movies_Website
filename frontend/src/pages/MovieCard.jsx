@@ -1,62 +1,55 @@
-import React from 'react'
-import {motion} from "framer-motion"
-import {Link, useParams } from "react-router-dom"
-const MovieCard = ({movie}) => {
+import React from "react";
+import { Link } from "react-router-dom";
 
-  
-  
+const MovieCard = ({ movie }) => {
   return (
     <Link to={`/singlecard/${movie._id}`}>
-    <motion.div
-      className="bg-gray-900 w-[200px] mx-2 h-[500px] text-white rounded-2xl shadow-lg p-4 flex flex-col gap-3 hover:scale-105 transition-transform duration-300"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.05 }}
+      <div
+        className="bg-gray-900 w-full max-w-[250px] sm:max-w-[280px] md:max-w-[300px]
+        rounded-2xl shadow-xl overflow-hidden mx-auto 
+        hover:scale-105 hover:shadow-2xl transition-all duration-300"
       >
-      {/* Poster */}
-      <div className="relative w-full h-48 rounded-lg overflow-hidden">
-        <img
-          src={movie.poster}
-          alt={movie.title}
-          className="w-full h-full object-cover"
+        {/* Poster */}
+        <div className="w-full h-[150px] sm:h-60 md:h-64 overflow-hidden">
+          <img
+            src={movie.poster}
+            alt={movie.title}
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
           />
+        </div>
+
+        {/* Content */}
+        <div className="p-4 flex flex-col justify-between h-[230px] sm:h-[210px] md:h-[230px]">
+          <div className="flex flex-col gap-2">
+            {/* Title */}
+            <h2 className="text-lg font-bold text-yellow-400 truncate text-center">
+              {movie.title}
+            </h2>
+
+            {/* Info */}
+            <div className="text-sm text-gray-200 space-y-1">
+              <p>
+                <span className="font-semibold text-gray-300">Genre:</span>{" "}
+                {movie.genre}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-300">Language:</span>{" "}
+                {movie.languages}
+              </p>
+              <p>
+                <span className="font-semibold text-gray-300">Director:</span>{" "}
+                {movie.director}
+              </p>
+              <p className="line-clamp-1">
+                <span className="font-semibold text-gray-300">Stars:</span>{" "}
+                {movie.stars}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+    </Link>
+  );
+};
 
-      {/* Title */}
-      <h2 className="text-xl font-bold text-yellow-400">{movie.title}</h2>
-
-      {/* Info */}
-      <div className="text-sm space-y-1">
-        <p>
-          <span className="font-semibold">Genre:</span> {movie.genre}
-        </p>
-        <p>
-          <span className="font-semibold">Language:</span> {movie.languages}
-        </p>
-        <p>
-          <span className="font-semibold">Director:</span> {movie.director}
-        </p>
-        <p>
-          <span className="font-semibold">Stars:</span> {movie.stars}
-        </p>
-        <p>
-          <span className="font-semibold">Category:</span> {movie.category}
-        </p>
-        
-      </div>
-
-      {/* Video Link */}
-      <a
-        href={movie.video}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-2 inline-block bg-yellow-500 text-black font-medium py-2 px-4 rounded-lg hover:bg-yellow-400 transition-all"
-        >
-        Watch Now 🎬
-      </a>
-    </motion.div>
-        </Link>
-  )
-}
-
-export default MovieCard
+export default MovieCard;

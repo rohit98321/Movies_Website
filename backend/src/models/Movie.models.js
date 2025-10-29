@@ -10,7 +10,7 @@ const movieSchema=new mongoose.Schema({
     poster:String,
     category:String
     
-})
+},{timestamps:true})
 
 const movieModel=mongoose.model("movie",movieSchema);
 

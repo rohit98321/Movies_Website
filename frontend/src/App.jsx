@@ -18,7 +18,7 @@ const App = () => {
     
     }, [])
   return (
-    <div className='text-2xl text-indigo-50 bg-neutral-800 p-2 w-screen h-full'>
+    <div className='text-2xl text-indigo-50 bg-[#016B61] p-2 w-screen h-full'>
     
     <Nav/>
     <Mainroutes/>

@@ -1,6 +1,7 @@
 const express = require("express");
 const movieModel = require("../models/Movie.models");
 const multer = require("multer");
+const validator =require("../middleware/validator.middleware")
 
 const { default: mongoose } = require("mongoose");
 const moiveController = require("../controller/movieContrller");
@@ -13,6 +14,7 @@ router.get("/movies", moiveController.moviefetchController);
 
 router.post(
   "/movies",
+  validator.createMovieValidator,
   upload.fields([
     { name: "poster", maxCount: 1 },
     { name: "video", maxCount: 1 },

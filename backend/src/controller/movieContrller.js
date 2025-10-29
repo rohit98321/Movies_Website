@@ -82,9 +82,7 @@ const movieupdateController=async(req,res)=>{
 const moviedeleteController=async (req,res)=>{
     const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: "Invalid movie ID" });
-  }
+  
 
   try {
     const movie = await movieModel.findOneAndDelete(id);
