@@ -11,7 +11,8 @@ const uploadFile =(file)=>{
     return new Promise((resolve,reject)=>{
         imagekit.upload({
             file:file.buffer,
-            fileName:"videos & posters"
+            fileName:"videos & posters",
+            folder:"movies"
         },(error,result)=>{
             if(error){
                 reject(error)

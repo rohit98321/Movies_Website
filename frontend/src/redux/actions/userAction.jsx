@@ -23,7 +23,15 @@ export const asyncUserLogin = (user) => async (dispatch, getstate) => {
     });
     console.log(data);
     dispatch(asyncGetUser());
-    toast.success("user login sucessfully");
+    toast.success("user login sucessfully", {
+      style: {
+        background: "#1C352D", // your background color
+        color: "#5E936C",      // your text color
+        fontWeight: "bold",
+        fontSize: "16px"
+      }
+    });
+
   } catch (error) {
     console.log(error);
     toast.error(error.response?.data?.message);

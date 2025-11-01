@@ -3,7 +3,7 @@ const {body,validationResult} = require("express-validator")
 const responseWithValidationsErrors = (req, res, next) => {
     const errors = validationResult(req);
   
-    if (!errors.isEmpty) {
+    if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
   
@@ -38,23 +38,6 @@ const responseWithValidationsErrors = (req, res, next) => {
       .notEmpty().withMessage("Category is required")
       .isIn(["bollywood", "hollywood", "animation", "south", "webseries"])
       .withMessage("Invalid category value"),
-  
-    body("video")
-      .custom((value, { req }) => {
-        if (!req.files || !req.files.video) {
-          throw new Error("Video file is required");
-        }
-        return true;
-      }),
-  
-    body("poster")
-      .custom((value, { req }) => {
-        if (!req.files || !req.files.poster) {
-          throw new Error("Poster image is required");
-        }
-        return true;
-      }),
-
       responseWithValidationsErrors
   ];
 

@@ -14,11 +14,11 @@ router.get("/movies", moiveController.moviefetchController);
 
 router.post(
   "/movies",
-  validator.createMovieValidator,
   upload.fields([
     { name: "poster", maxCount: 1 },
     { name: "video", maxCount: 1 },
   ]),
+  validator.createMovieValidator,
   moiveController.moivepostController
 );
 

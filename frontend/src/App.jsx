@@ -1,9 +1,10 @@
 import {useEffect} from 'react'
 import Mainroutes from './routes/Mainroutes'
-import Nav from './nav/Nav'
+
 import { asyncgetmovies } from "./redux/actions/movieAction"
 import { asyncGetUser } from "./redux/actions/userAction"
 import { useDispatch } from 'react-redux'
+import BubbleNav from './nav/BubbleNav'
 
 const App = () => {
 
@@ -18,9 +19,9 @@ const App = () => {
     
     }, [])
   return (
-    <div className='text-2xl text-indigo-50 bg-[#016B61] p-2 w-screen h-full'>
+    <div className='text-2xl text-indigo-50 bg-[#016B61] p-20 w-screen h-full'>
     
-    <Nav/>
+    <BubbleNav/>
     <Mainroutes/>
     </div>
   )

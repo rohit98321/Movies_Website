@@ -16,7 +16,7 @@ const AdminLogout = () => {
     }
 
   return (
-    <div className='h-screen' >
+    <div className='h-screen p-20' >
 
 
         <button
